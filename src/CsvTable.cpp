@@ -10,41 +10,67 @@ const vector<vector<string>>& CsvTable::get_body() {
 
 void CsvTable::add_row(vector<string> row) {
     body.push_back(row);
+    rebuild_sizes(row);
     return;
 }
 
-bool CsvTable::check_if_rebuild_needed(vector<string> row) {
-    if (row.size() == column_sizes.size()) {
-        for(size_t i = 0; i < row.size(); i++) {
-            size_t row_size = row.at(i).size();
-            if(row_size > column_sizes.at(i)) {
-                column_sizes.at(i) = row_size;
-            }
-        }
-    } else if (row.size() > column_sizes.size()) {
+const vector<size_t>& CsvTable::get_sizes() {
+    return column_sizes;
+}
 
-    } else if (row.size() < column_sizes.size()) {
-        
+void CsvTable::rebuild_sizes(vector<string> row) {
+
+    if (row.size() > column_sizes.size()) {
+        column_sizes.resize(row.size());
     }
 
-    return false;
+    for(size_t i = 0; i < row.size(); i++) {
+        size_t row_size = row.at(i).size();
+        if(row_size > column_sizes.at(i)) {
+            column_sizes.at(i) = row_size;
+        }
+    }
+
+    total_horizontal_size = 0;
+    for(auto it = column_sizes.begin(); it != column_sizes.end(); it++) {
+        total_horizontal_size += (*it);
+    }
+    
+    total_horizontal_size += (column_sizes.size() * 3) + 1;
+
+    return;
 }
 
 void CsvTable::set_header(vector<string> h) {
     has_header = true;
     header = h;
 
-    return;
-}
-void CsvTable::Print() {
+    rebuild_sizes(h);
 
     return;
 }
 
-void CsvTable::resize() {
-    // for(auto it = body.begin(); )
+string CsvTable::Print() {
+    stringstream s;
 
-    return;
+    cout << total_horizontal_size << endl;
+    s << string(total_horizontal_size, '-') << endl;
+    for(auto it = body.begin(); it != body.end(); it++) {
+        s << print_row(*it);
+        s << endl;
+        if(it != (body.end() -1)) {
+            s << print_delimiter();
+            s << endl;
+        }
+    }
+
+    s << string(total_horizontal_size, '-') << endl;
+
+    cout << s.str();
+
+    return s.str();
 }
+
+
 
 
