@@ -1,9 +1,8 @@
-#include <iostream>
-#include <vector>
-
-using namespace std;
+#include "CsvTable.h"
 
 int main() {
+    CsvTable csv_table;
+
     return 0;
 }
 

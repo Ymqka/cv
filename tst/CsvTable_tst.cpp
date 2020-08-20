@@ -109,7 +109,7 @@ TEST(CsvTable, print_1) {
 
     vector<string> row =        {"ya", "ti", "o", "onii"};
     vector<string> lesser_row = {"y", "t",};
-    vector<string> bigger_row = {"fasyay", "fastit", "onfasi"};
+    vector<string> bigger_row = {"fasyaf", "fastitf", "onfas"};
 
     csv_table.add_row(row);
     csv_table.add_row(lesser_row);

@@ -53,7 +53,6 @@ void CsvTable::set_header(vector<string> h) {
 string CsvTable::Print() {
     stringstream s;
 
-    cout << total_horizontal_size << endl;
     s << string(total_horizontal_size, '-') << endl;
     for(auto it = body.begin(); it != body.end(); it++) {
         s << print_row(*it);

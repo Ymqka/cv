@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 enable_testing()
 
-include_directories(src)
+include_directories(include)
 
 add_subdirectory(tst)
 add_subdirectory(src)
